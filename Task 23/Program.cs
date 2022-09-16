@@ -27,7 +27,17 @@ class Result
 
     public static List<int> matchingStrings(List<string> strings, List<string> queries)
     {
+        List<int> result = new List<int>();
+        int count = 0;
 
+        for (int i = 0; i < queries.Count; i++)
+        {
+            count = strings.Count(x => x == queries[i]);
+            result.Add(count);
+            Console.WriteLine(count);
+        }
+
+        return result;
     }
 }
 
@@ -35,33 +45,32 @@ class Program
 {
     static void Main()
     {
-        List<string> strings = new List<string>();
-        List<string> queries = new List<string>();
-        List<int> res = Result.matchingStrings(strings, queries);
-
-        //TextWriter textWriter = new 
+        TextWriter textWriter = new StreamWriter(".\\Text.txt", true);
+        Console.Write("Vvod strings: ");
         int stringsCount = Convert.ToInt32(Console.ReadLine().Trim());
-
-
+        List<string> strings = new List<string>();
         for (int i = 0; i < stringsCount; i++)
         {
             string stringsItem = Console.ReadLine();
             strings.Add(stringsItem);
         }
 
+        Console.Write("Vvod queries: ");
         int queriesCount = Convert.ToInt32(Console.ReadLine().Trim());
-
-
+        List<string> queries = new List<string>();
         for (int i = 0; i < queriesCount; i++)
         {
             string queriesItem = Console.ReadLine();
             queries.Add(queriesItem);
         }
 
+        List<int> res = Result.matchingStrings(strings, queries);
 
-        //textWriter.WriteLine(String.Join("\n", res));
-        //textWriter.Flush();
-        //textWriter.Close();
+        textWriter.WriteLine(String.Join("\n", res));
+        textWriter.Flush();
+        textWriter.Close();
+
+        Console.ReadKey();
     }
 }
 
